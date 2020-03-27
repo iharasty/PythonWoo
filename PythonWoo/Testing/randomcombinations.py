@@ -7,6 +7,8 @@ class combo:
     def getCombo(self):
         return (self.param1,self.param2)
     
+print("change for git testing")
+    
 class comboCollection:
     def __init__(self):
         self.list = []
