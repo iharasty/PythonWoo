@@ -1,0 +1,43 @@
+----Classes----
+
+
+----File IO----
+
+
+----json-----
+	
+	loadS/dumpS are for STRINGS
+	load/dump are for FILES
+	
+	json.dumps(dict) dict object into a string
+	json.loads(string) returns a dict
+	
+	arrays ARE LISTS and accessed with [int]:
+	"<title>" : [
+		...
+	]
+	
+	Dictionaries are OBJECTS and accessed with key pairs
+	{
+		"<var1>" = <val>,
+		"name" = "isaac",
+		"age" = 21
+	}
+	
+	
+
+----datetime----
+
+	correct import statement
+	seems to make it an object in the class?
+	from datetime import datetime
+	
+	getting the time
+	now = datetime.now()
+	
+	accessing a particular thing
+		now.hour
+		now.minute
+		now.month
+	
+	

@@ -1,0 +1,261 @@
+--------------Problem 7 PE--------------
+	Last edited: 2020-03-23
+	~~~~~~~~~
+
+	Figure out the largest multiple of the integers of 13 adjacdent numbers
+
+	~~~~~~~~~
+
+
+def parseString(a):
+    if len(a) != 13 :
+        return 0
+    
+    value = 1
+    for char in a:
+        value = value * int(char)
+    
+    return value
+
+inputfile = open("testing2.txt",mode='r',encoding = 'utf-8')
+inputstring = inputfile.read()
+max = 0
+
+for i in range(0,len(inputstring) - 13):
+    currstring = inputstring[i:i+13]
+    currval = parseString(currstring)
+    if currval > max:
+        max = currval
+    
+print(max)
+
+
+--------------Problem 8 PE--------------
+	Last edited: 2020-03-24
+	~~~~~~~~~
+	A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+a2 + b2 = c2
+
+For example, 32 + 42 = 9 + 16 = 25 = 52.
+
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc.
+	~~~~~~~~~
+
+
+import math
+ 
+foundoutter = False
+foundinner = False
+a = 1
+b = 2
+c = 0
+endingtupple = ()
+
+while not foundoutter:
+    print("in outter")
+    b = a + 1
+    while not foundinner:
+        print("in inner")
+
+        c = math.sqrt(((a * 1.0) ** 2) + ((b * 1.0) ** 2))
+        print( a,b,c )
+        '''test to see if we have a match'''       
+        if c.is_integer():
+            if a + b + c == 1000:
+                foundinner = True
+                foundoutter = True
+                endingtupple = (a,b,c)
+                    
+        if a + b + c > 1000:
+            foundinner = True
+        b+= 1
+        
+        if b == 1000:
+            foundinner = True
+    
+    a += 1
+    foundinner = False 
+    if a == 1000:
+        foundoutter = True
+    
+print(endingtupple)
+
+
+--RANDOM: 2x2 Matrix string to tuples--
+	Last edited: 2020-03-26
+	~~~~~~~~~
+
+	Turns a 2x2 of string int representations into a 2x2 tuple representation
+	from a target file
+
+	~~~~~~~~~
+
+
+
+
+file = open('testing.txt', mode = 'r')
+
+def parseFile(file):
+    
+    masteremptylist = []
+    char = file.read(2)
+    
+    while char != "":
+        
+        emptylist = []
+        
+        
+        while char != '\n':
+            
+            if char == " ":
+                char = file.read(2)
+            else:
+                num = int(char)
+                emptylist.append(num)
+                char = file.read(1)
+        
+        
+        masteremptylist.append(emptylist)
+        char = file.read(2)
+        
+    for i in range(0,len(masteremptylist)):
+        masteremptylist[i] = tuple(masteremptylist[i])
+        
+    masteremptylist = tuple(masteremptylist)
+    
+    return masteremptylist
+            
+        
+parseFile(file)
+        
+
+
+-------------PE Problem 11-------------
+	Last edited: 2020-03-26
+	~~~~~~~~~
+
+	What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
+
+	~~~~~~~~~
+	
+file = open('testing.txt', mode = 'r')
+
+def parseFile(file):
+    
+    masteremptylist = []
+    char = file.read(2)
+    
+    while char != "":
+        
+        emptylist = []
+        
+        
+        while char != '\n':
+            
+            if char == " ":
+                char = file.read(2)
+            else:
+                num = int(char)
+                emptylist.append(num)
+                char = file.read(1)
+        
+        
+        masteremptylist.append(emptylist)
+        char = file.read(2)
+        
+    for i in range(0,len(masteremptylist)):
+        masteremptylist[i] = tuple(masteremptylist[i])
+        
+    masteremptylist = tuple(masteremptylist)
+    
+    return masteremptylist
+            
+matrix = parseFile(file)
+
+def maxhorizontals(matrix):
+    
+    maxsum = 0
+    start = ()
+    '''i = rows'''
+    for i in range(0,len(matrix)):
+        '''j = collumns'''
+        for j in range(0,len(matrix[i]) - 4):
+            '''k = 4 in a row'''
+            sum = 1
+            for k in range(0,4):
+                sum *= matrix[i][j + k]
+            
+            if sum > maxsum:
+                maxsum = sum
+                start = (i , j)
+                
+    print("max = " + str(maxsum) + " starting " + str(start))
+
+def maxrightdiagnals(matrix):
+    
+    maxsum = 0
+    start = ()
+    
+    '''i = rows'''
+    for i in range(0,len(matrix) - 4):
+        '''j = collumns'''
+        for j in range(0,len(matrix[i]) - 4):
+            '''k = 4 in a row'''
+            sum = 1
+            for k in range(0,4):
+                sum *= matrix[i + k][j + k]
+            
+            if sum > maxsum:
+                maxsum = sum
+                start = (i , j)
+                
+    print("max = " + str(maxsum) + " starting " + str(start))
+    
+def maxleftdiagnals(matrix):
+    
+    maxsum = 0
+    start = ()
+    
+    '''i = rows'''
+    for i in range(0,len(matrix) - 4):
+        '''j = collumns'''
+        for j in range(0,len(matrix[i]) - 4):
+            '''k = 4 in a row'''
+            sum = 1
+            for k in range(0,4):
+                sum *= matrix[i + k][j + (3 - k)]
+            
+            if sum > maxsum:
+                maxsum = sum
+                start = (i , j)
+                
+    print("max = " + str(maxsum) + " starting " + str(start))    
+
+def maxverticals(matrix):
+    
+    maxsum = 0
+    start = ()
+    
+    '''i = rows'''
+    for i in range(0,len(matrix) - 4):
+        '''j = collumns'''
+        for j in range(0,len(matrix[i])):
+            '''k = 4 in a row'''
+            sum = 1
+            for k in range(0,4):
+                sum *= matrix[i + k][j]
+            
+            if sum > maxsum:
+                maxsum = sum
+                start = (i , j)
+                
+    print("max = " + str(maxsum) + " starting " + str(start))
+
+print(matrix)
+maxhorizontals(matrix)
+maxverticals(matrix)
+maxrightdiagnals(matrix)
+maxleftdiagnals(matrix)
+
+
