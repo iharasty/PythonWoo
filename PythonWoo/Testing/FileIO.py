@@ -2,6 +2,9 @@
 Created on Mar 23, 2020
 
 @author: Isaac Harasty
+tes
+tes
+
 '''
 
 inputfile = open("testing.txt",mode = 'r',encoding = 'utf-8')
