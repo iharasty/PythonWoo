@@ -6,7 +6,6 @@ To add a target file to the glossary of old ProjectEuler answers
 '''
 
 from datetime import date
-from idlelib.iomenu import encoding
 
 targetfile = input("Please input the target file name...\n (no .py needed)\t")
 header = input("Please input the header for the file...\n")
